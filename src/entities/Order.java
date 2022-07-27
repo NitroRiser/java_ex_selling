@@ -2,13 +2,12 @@ package entities;
 
 import entities.enums.OrderStatus;
 
-import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class Order {
-    private static final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
     private Date moment = new Date();
     private OrderStatus status;
@@ -54,23 +53,19 @@ public class Order {
         return total;
     }
 
-    Product product = new Product();
-    OrderItem item = new OrderItem();
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
         for (OrderItem orderItem : items) {
-            sb.append(product.getName() + ", ");
-            sb.append(Product.getPrice());
-            sb.append(", Quantity: ");
-            sb.append(orderItem.getQuantity());
+            sb.append(orderItem.getName());
+            sb.append(", $" + orderItem.getPrice());
+            sb.append(", Quantity: " + orderItem.getQuantity());
             sb.append(", Subtotal: " + orderItem.subTotal() + "\n");
         }
-        String str = sb.toString();
-        return str;
+        
+        return sb.toString();
     }
 
-
+    
 }

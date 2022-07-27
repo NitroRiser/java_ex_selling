@@ -17,6 +17,7 @@ public class Main {
         Locale.setDefault(Locale.US);
         Scanner sc = new Scanner(System.in);
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
         System.out.println("Enter client data:");
         System.out.print("Name: ");
@@ -45,24 +46,26 @@ public class Main {
             System.out.print("Product name: ");
             String nameProduct = sc.nextLine();
             System.out.print("Product price: ");
-            double price = sc.nextDouble();
-            Product product = new Product(nameProduct, price);
+            double priceProduct = sc.nextDouble();
+            Product product = new Product(nameProduct, priceProduct);
             System.out.print("Quantity: ");
             int quantity = sc.nextInt();
-            OrderItem item = new OrderItem(quantity, product.getPrice());
+            OrderItem item = new OrderItem(product.getName(),quantity, product.getPrice());
             order.addItem(item);
             sc.nextLine();
         }
         System.out.println();
         System.out.println("ORDER SUMMARY: ");
+        System.out.print("Order moment: ");
+        System.out.println(sdf2.format(order.getMoment()));
         System.out.print("Order Status: ");
-        System.out.println();
+        System.out.println(order.getStatus());
         System.out.print("Client: " + client.getName() + " (" + sdf.format(client.getBirthDate()) + ") - " + client.getEmail());
         System.out.println();
         System.out.println("Order items:");
-        order.toString();
+        System.out.println(order.toString()); 
         System.out.print("Total price: ");
-        order.total();
+        System.out.println(order.total());
 
         sc.close();
     }
